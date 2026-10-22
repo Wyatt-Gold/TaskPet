@@ -1,6 +1,7 @@
 Contributions:
 Wyatt Golden - Designed the Login and Signup Screen, and set up FireBase
 Gayatri Nunna - Designed Base function for tasks list and added delete feature
+Taylor Johnson - Designed shop screen and added the purchasing functionality
 
 Differences: 
 There is not deviation from the alpha. 
