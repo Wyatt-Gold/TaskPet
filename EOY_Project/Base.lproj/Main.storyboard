@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D6O-kY-6z2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HM-VC">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25073"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -613,14 +613,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home — coming soon" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="HM-LABEL">
-                                <rect key="frame" x="113.33333333333333" y="416" width="166.33333333333337" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="PrimaryText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="yw3-bv-GbM">
+                                <rect key="frame" x="0.0" y="320" width="393" height="482"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" textLabel="SQG-K0-bpf" detailTextLabel="gCi-rU-zpF" style="IBUITableViewCellStyleSubtitle" id="Aiu-kz-l48">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aiu-kz-l48" id="bnr-92-nh4">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="51"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SQG-K0-bpf">
+                                                    <rect key="frame" x="20" y="8" width="25" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gCi-rU-zpF">
+                                                    <rect key="frame" x="19.999999999999996" y="24.333333333333336" width="52.666666666666664" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t98-eY-8Ay">
+                                <rect key="frame" x="358" y="284" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+"/>
+                                <connections>
+                                    <segue destination="9Sk-fK-l1B" kind="presentation" identifier="AddTaskSegue" id="Rj4-hk-DzN"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM-SIGNOUTBTN">
-                                <rect key="frame" x="113.33333333333333" y="456.33333333333331" width="166.33333333333337" height="44"/>
+                                <rect key="frame" x="190" y="82" width="166.33333333333337" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="HM-SIGNOUTBTNH"/>
                                 </constraints>
@@ -636,17 +669,64 @@
                         <viewLayoutGuide key="safeArea" id="HM-SA"/>
                         <color key="backgroundColor" name="AppBackground"/>
                         <constraints>
-                            <constraint firstItem="HM-LABEL" firstAttribute="centerX" secondItem="HM-V" secondAttribute="centerX" id="HM-C1"/>
-                            <constraint firstItem="HM-LABEL" firstAttribute="centerY" secondItem="HM-V" secondAttribute="centerY" id="HM-C2"/>
-                            <constraint firstItem="HM-SIGNOUTBTN" firstAttribute="top" secondItem="HM-LABEL" secondAttribute="bottom" constant="20" id="HM-C3"/>
-                            <constraint firstItem="HM-SIGNOUTBTN" firstAttribute="leading" secondItem="HM-LABEL" secondAttribute="leading" id="HM-C4"/>
-                            <constraint firstItem="HM-SIGNOUTBTN" firstAttribute="trailing" secondItem="HM-LABEL" secondAttribute="trailing" id="HM-C5"/>
+                            <constraint firstItem="yw3-bv-GbM" firstAttribute="leading" secondItem="HM-SA" secondAttribute="leading" id="C2G-Gg-qda"/>
+                            <constraint firstItem="HM-SA" firstAttribute="trailing" secondItem="HM-SIGNOUTBTN" secondAttribute="trailing" constant="36.670000000000002" id="NKl-YY-lOh"/>
+                            <constraint firstItem="HM-SIGNOUTBTN" firstAttribute="top" secondItem="HM-V" secondAttribute="top" constant="82" id="OAx-F2-kmr"/>
+                            <constraint firstAttribute="bottom" secondItem="yw3-bv-GbM" secondAttribute="bottom" constant="50" id="QCh-a4-OcV"/>
+                            <constraint firstItem="HM-SIGNOUTBTN" firstAttribute="leading" secondItem="HM-SA" secondAttribute="leading" constant="190" id="Vyf-CK-H0u"/>
+                            <constraint firstItem="yw3-bv-GbM" firstAttribute="trailing" secondItem="HM-SA" secondAttribute="trailing" id="Y9k-BW-2Me"/>
+                            <constraint firstItem="yw3-bv-GbM" firstAttribute="top" secondItem="HM-SA" secondAttribute="top" constant="202" id="oNH-hL-joS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableview" destination="yw3-bv-GbM" id="wuD-mv-THd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HM-FR" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-700" y="1000"/>
+        </scene>
+        <!--Add Task View Controller-->
+        <scene sceneID="JFK-Px-Vjz">
+            <objects>
+                <viewController id="9Sk-fK-l1B" customClass="AddTaskViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JaY-gt-SEo">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMu-L5-IDw">
+                                <rect key="frame" x="33" y="156" width="40" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rx3-Wr-M9r">
+                                <rect key="frame" x="85" y="149" width="292" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAz-vW-koX">
+                                <rect key="frame" x="157" y="225" width="61" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPress:" destination="9Sk-fK-l1B" eventType="touchUpInside" id="HUP-sK-ufR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oaf-XQ-KTa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleField" destination="rx3-Wr-M9r" id="MhP-wV-dkF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GiK-Mu-uVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="206.87022900763358" y="1002.8169014084508"/>
         </scene>
         <!--Pet View Controller-->
         <scene sceneID="lHM-m1-5Tb">
@@ -859,11 +939,11 @@
         <image name="FoodIcon" width="184" height="190"/>
         <image name="SoapIcon" width="184" height="184"/>
         <image name="WaterIcon" width="184" height="182"/>
-        <image name="bag" catalog="system" width="128" height="128"/>
-        <image name="gearshape" catalog="system" width="128" height="123"/>
-        <image name="house" catalog="system" width="128" height="104"/>
-        <image name="ring" catalog="system" width="128" height="124"/>
-        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="bag" catalog="system" width="123" height="128"/>
+        <image name="gearshape" catalog="system" width="128" height="128"/>
+        <image name="house" catalog="system" width="128" height="108"/>
+        <image name="ring" catalog="system" width="128" height="128"/>
+        <image name="star" catalog="system" width="128" height="120"/>
         <namedColor name="AccentColor">
             <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
