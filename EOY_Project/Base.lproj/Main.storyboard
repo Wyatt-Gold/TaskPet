@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HM-VC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LD-VC">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25073"/>
@@ -337,7 +337,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CC-STACK">
                                 <rect key="frame" x="24" y="380" width="345" height="92.333333333333314"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect your calendar — coming soon" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="CC-LABEL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect your Apple Calendar so tasks with due dates can show up alongside your events." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="CC-LABEL">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="PrimaryText"/>
@@ -377,6 +377,7 @@
         <scene sceneID="T6p-Qb-CXT">
             <objects>
                 <viewController id="wG0-E9-ybK" customClass="ShopViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shop" image="bag" catalog="system" id="SH-TBI"/>
                     <view key="view" contentMode="scaleToFill" id="Pkq-rW-Sc1">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -396,28 +397,6 @@
                                 <color key="textColor" name="PrimaryTeal"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F3M-dY-77s">
-                                <rect key="frame" x="0.0" y="784" width="393" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem title="Home" image="house" catalog="system" id="Mdl-EE-q4C">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Tasks" image="star" catalog="system" id="xVg-qU-mgN">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Rings" image="ring" catalog="system" id="PDZ-Ao-eIn">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Shop" image="bag" catalog="system" id="ygN-x4-Jpc">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Settings" image="gearshape" catalog="system" id="uDd-sU-tKA">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                </items>
-                            </tabBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Buy items to keep your pet happy and healthy!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ob0-of-OfL">
                                 <rect key="frame" x="16" y="150" width="361" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -608,7 +587,8 @@
         <!--Home View Controller-->
         <scene sceneID="sc-hm">
             <objects>
-                <viewController storyboardIdentifier="Home" id="HM-VC" customClass="HomeViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HM-VC" customClass="HomeViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Tasks" image="star" catalog="system" id="HM-TBI"/>
                     <view key="view" contentMode="scaleToFill" id="HM-V">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -732,32 +712,11 @@
         <scene sceneID="lHM-m1-5Tb">
             <objects>
                 <viewController id="D6O-kY-6z2" customClass="PetViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="PT-TBI"/>
                     <view key="view" contentMode="scaleToFill" id="dZ3-LG-3OC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBR-H2-3fb">
-                                <rect key="frame" x="0.0" y="784" width="393" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem title="Home" image="house" catalog="system" id="IfE-ww-HQR">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Tasks" image="star" catalog="system" id="FJy-7x-XuM">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Rings" image="ring" catalog="system" id="Jpo-ca-RxQ">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Shop" image="bag" catalog="system" id="WeT-LH-Rij">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                    <tabBarItem title="Settings" image="gearshape" catalog="system" id="cyc-80-OJx">
-                                        <color key="badgeColor" name="PrimaryTeal"/>
-                                    </tabBarItem>
-                                </items>
-                            </tabBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZi-ab-aLF">
                                 <rect key="frame" x="29" y="61" width="52" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -932,6 +891,240 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWY-1R-St1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2664.8854961832062" y="200"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="sc-st">
+            <objects>
+                <viewController id="ST-VC" customClass="SettingsViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="gearshape" catalog="system" id="ST-TBI"/>
+                    <view key="view" contentMode="scaleToFill" id="ST-V">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ST-STACK">
+                                <rect key="frame" x="24" y="80" width="345" height="400"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST-TITLE">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        <color key="textColor" name="PrimaryText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dog.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ST-AVATAR">
+                                        <rect key="frame" x="132.5" y="50" width="80" height="80"/>
+                                        <color key="tintColor" name="PrimaryTeal"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="ST-AVATARW"/>
+                                            <constraint firstAttribute="height" constant="80" id="ST-AVATARH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-NAMELABEL">
+                                        <rect key="frame" x="0.0" y="146" width="345" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" name="SecondaryText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Display name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ST-NAMEFIELD">
+                                        <rect key="frame" x="0.0" y="162" width="345" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="ST-NAMEFIELDH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-SAVEBTN">
+                                        <rect key="frame" x="0.0" y="214" width="345" height="44"/>
+                                        <color key="backgroundColor" name="PrimaryTeal"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ST-SAVEBTNH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="Save Username">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveUsernameTapped:" destination="ST-VC" eventType="touchUpInside" id="ST-A1"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pet" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-PETLABEL">
+                                        <rect key="frame" x="0.0" y="274" width="345" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" name="SecondaryText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ST-PETROW">
+                                        <rect key="frame" x="0.0" y="290" width="345" height="52"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-DOGBTN">
+                                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="ST-DOGBTNH"/>
+                                                </constraints>
+                                                <state key="normal" title="Dog" image="dog.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="dogTapped:" destination="ST-VC" eventType="touchUpInside" id="ST-A2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-CATBTN">
+                                                <rect key="frame" x="178.5" y="0.0" width="166.5" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="ST-CATBTNH"/>
+                                                </constraints>
+                                                <state key="normal" title="Cat" image="cat.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="catTapped:" destination="ST-VC" eventType="touchUpInside" id="ST-A3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ST-DARKROW">
+                                        <rect key="frame" x="0.0" y="354" width="345" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Mode" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-DARKLABEL">
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="PrimaryText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ST-DARKSWITCH">
+                                                <rect key="frame" x="295" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="darkModeToggled:" destination="ST-VC" eventType="valueChanged" id="ST-A4"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ST-SA"/>
+                        <color key="backgroundColor" name="AppBackground"/>
+                        <constraints>
+                            <constraint firstItem="ST-STACK" firstAttribute="top" secondItem="ST-SA" secondAttribute="top" constant="24" id="ST-C1"/>
+                            <constraint firstItem="ST-STACK" firstAttribute="leading" secondItem="ST-SA" secondAttribute="leading" constant="24" id="ST-C2"/>
+                            <constraint firstItem="ST-SA" firstAttribute="trailing" secondItem="ST-STACK" secondAttribute="trailing" constant="24" id="ST-C3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="ST-AVATAR" id="ST-O1"/>
+                        <outlet property="catButton" destination="ST-CATBTN" id="ST-O2"/>
+                        <outlet property="darkModeSwitch" destination="ST-DARKSWITCH" id="ST-O3"/>
+                        <outlet property="dogButton" destination="ST-DOGBTN" id="ST-O4"/>
+                        <outlet property="usernameField" destination="ST-NAMEFIELD" id="ST-O5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ST-FR" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="2200"/>
+        </scene>
+        <!--Rings View Controller-->
+        <scene sceneID="sc-ri">
+            <objects>
+                <viewController id="RI-VC" customClass="RingsViewController" customModule="EOY_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Rings" image="ring" catalog="system" id="RI-TBI"/>
+                    <view key="view" contentMode="scaleToFill" id="RI-V">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="RI-STACK">
+                                <rect key="frame" x="24" y="80" width="345" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Rings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TITLE">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        <color key="textColor" name="PrimaryText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKROW">
+                                        <rect key="frame" x="0.0" y="50" width="345" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Walk" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKLABEL">
+                                                <rect key="frame" x="0.0" y="0.0" width="307" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="PrimaryText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKICON">
+                                                <rect key="frame" x="319" y="0.0" width="26" height="30"/>
+                                                <color key="tintColor" name="PrimaryTeal"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="26" id="RI-WALKICONW"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSROW">
+                                        <rect key="frame" x="0.0" y="96" width="345" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tasks" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSLABEL">
+                                                <rect key="frame" x="0.0" y="0.0" width="307" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="PrimaryText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSICON">
+                                                <rect key="frame" x="319" y="0.0" width="26" height="30"/>
+                                                <color key="tintColor" name="PrimaryTeal"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="26" id="RI-TASKSICONW"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREROW">
+                                        <rect key="frame" x="0.0" y="142" width="345" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Care" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CARELABEL">
+                                                <rect key="frame" x="0.0" y="0.0" width="307" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="PrimaryText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREICON">
+                                                <rect key="frame" x="319" y="0.0" width="26" height="30"/>
+                                                <color key="tintColor" name="PrimaryTeal"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="26" id="RI-CAREICONW"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RI-SA"/>
+                        <color key="backgroundColor" name="AppBackground"/>
+                        <constraints>
+                            <constraint firstItem="RI-STACK" firstAttribute="top" secondItem="RI-SA" secondAttribute="top" constant="24" id="RI-C1"/>
+                            <constraint firstItem="RI-STACK" firstAttribute="leading" secondItem="RI-SA" secondAttribute="leading" constant="24" id="RI-C2"/>
+                            <constraint firstItem="RI-SA" firstAttribute="trailing" secondItem="RI-STACK" secondAttribute="trailing" constant="24" id="RI-C3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="careStatusImageView" destination="RI-CAREICON" id="RI-O1"/>
+                        <outlet property="tasksStatusImageView" destination="RI-TASKSICON" id="RI-O2"/>
+                        <outlet property="walkStatusImageView" destination="RI-WALKICON" id="RI-O3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RI-FR" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="2800"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="sc-tab">
+            <objects>
+                <tabBarController storyboardIdentifier="Home" id="TAB-VC" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="TAB-BAR"/>
+                    <connections>
+                        <segue destination="D6O-kY-6z2" kind="relationship" relationship="viewControllers" id="TAB-SEG1"/>
+                        <segue destination="HM-VC" kind="relationship" relationship="viewControllers" id="TAB-SEG2"/>
+                        <segue destination="RI-VC" kind="relationship" relationship="viewControllers" id="TAB-SEG5"/>
+                        <segue destination="wG0-E9-ybK" kind="relationship" relationship="viewControllers" id="TAB-SEG3"/>
+                        <segue destination="ST-VC" kind="relationship" relationship="viewControllers" id="TAB-SEG4"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TAB-FR" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="1600"/>
         </scene>
     </scenes>
     <resources>

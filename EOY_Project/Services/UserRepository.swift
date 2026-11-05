@@ -35,4 +35,8 @@ struct UserRepository {
         let data = try Firestore.Encoder().encode(connections)
         try await db.collection("users").document(uid).setData(["connections": data], merge: true)
     }
+
+    func updateProfile(uid: String, displayName: String) async throws {
+        try await db.collection("users").document(uid).setData(["displayName": displayName], merge: true)
+    }
 }

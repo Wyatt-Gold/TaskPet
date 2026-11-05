@@ -8,5 +8,8 @@ struct Pet: Codable {
     var energy: Int = 60
     var cleanliness: Int = 40
     var points: Int = 0
+    var foodCount: Int = 0
+    var waterCount: Int = 0
+    var soapCount: Int = 0
     @ServerTimestamp var lastUpdated: Timestamp?
 }

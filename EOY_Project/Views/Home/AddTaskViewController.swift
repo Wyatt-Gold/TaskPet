@@ -22,7 +22,7 @@ class AddTaskViewController: UIViewController {
             makePopup(popupTitle: "Missing Title", popupMessage:"Add Title to Task")
             return
         }
-        let task = TaskItem(title: titletxt, priority:"")
+        let task = TaskItem(title: titletxt, priority: "medium")
         delegate?.addTask(newTask: task)
         dismiss(animated: true,completion: nil)
     }

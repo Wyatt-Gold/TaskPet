@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ShopViewController: UIViewController {
 
@@ -16,37 +17,62 @@ class ShopViewController: UIViewController {
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var waterImage: UIImageView!
     @IBOutlet weak var soapImage: UIImageView!
-    
+
     @IBOutlet weak var foodOwnLabel: UILabel!
     @IBOutlet weak var waterOwnLabel: UILabel!
     @IBOutlet weak var soapOwnLabel: UILabel!
-    
-    var foodCount: Int = 0
-    var waterCount: Int = 0
-    var soapCount: Int = 0
-    
-    var points: Int = 100
-    
+
+    private let petRepository = PetRepository()
+    private var pet = Pet()
+
+    var foodCount: Int { pet.foodCount }
+    var waterCount: Int { pet.waterCount }
+    var soapCount: Int { pet.soapCount }
+
+    var points: Int { pet.points }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        pointsLabel.text = "\(points) points"
         pointsLabel.layer.cornerRadius = 25
         pointsLabel.layer.masksToBounds = true
-        
+
         foodView.layer.cornerRadius = 10
         foodView.layer.masksToBounds = true
         waterView.layer.cornerRadius = 10
         waterView.layer.masksToBounds = true
         soapView.layer.cornerRadius = 10
         soapView.layer.masksToBounds = true
-        
+
         foodImage.layer.cornerRadius = 15
         foodImage.layer.masksToBounds = true
         waterImage.layer.cornerRadius = 15
         waterImage.layer.masksToBounds = true
         soapImage.layer.cornerRadius = 15
         soapImage.layer.masksToBounds = true
+
+        refreshLabels()
+        Task { await loadPet() }
+    }
+
+    private func loadPet() async {
+        guard let uid = Auth.auth().currentUser?.uid,
+              let fetched = try? await petRepository.fetchPet(uid: uid) else { return }
+        pet = fetched
+        refreshLabels()
+    }
+
+    private func refreshLabels() {
+        pointsLabel.text = "\(points) points"
+        foodOwnLabel.text = "Currently own: \(foodCount)"
+        waterOwnLabel.text = "Currently own: \(waterCount)"
+        soapOwnLabel.text = "Currently own: \(soapCount)"
+    }
+
+    private func persistPet() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let pet = self.pet
+        Task { try? await petRepository.updatePet(uid: uid, pet: pet) }
     }
     
     @IBAction func foodBuyButtonPressed(_ sender: Any) {
@@ -57,10 +83,10 @@ class ShopViewController: UIViewController {
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { alert in
             if (self.points >= 50) {
-                self.points -= 50
-                self.foodCount += 1
-                self.foodOwnLabel.text = "Currently own: \(self.foodCount)"
-                self.pointsLabel.text = "\(self.points) points"
+                self.pet.points -= 50
+                self.pet.foodCount += 1
+                self.refreshLabels()
+                self.persistPet()
             } else {
                 self.makePopup()
             }
@@ -83,10 +109,10 @@ class ShopViewController: UIViewController {
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { alert in
             if (self.points >= 25) {
-                self.points -= 25
-                self.waterCount += 1
-                self.waterOwnLabel.text = "Currently own: \(self.waterCount)"
-                self.pointsLabel.text = "\(self.points) points"
+                self.pet.points -= 25
+                self.pet.waterCount += 1
+                self.refreshLabels()
+                self.persistPet()
             } else {
                 self.makePopup()
             }
@@ -107,10 +133,10 @@ class ShopViewController: UIViewController {
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { alert in
             if (self.points >= 25) {
-                self.points -= 25
-                self.soapCount += 1
-                self.soapOwnLabel.text = "Currently own: \(self.soapCount)"
-                self.pointsLabel.text = "\(self.points) points"
+                self.pet.points -= 25
+                self.pet.soapCount += 1
+                self.refreshLabels()
+                self.persistPet()
             } else {
                 self.makePopup()
             }
