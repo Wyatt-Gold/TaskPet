@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 protocol AddTask{
     func addTask(newTask: TaskItem)
 }
@@ -13,6 +14,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     private let dailyStatsRepository = DailyStatsRepository()
     private let userRepository = UserRepository()
     private var taskGoal = 5
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableview.delegate = self
@@ -33,7 +40,18 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         guard let uid = Auth.auth().currentUser?.uid else { return }
         if let tasks = try? await taskRepository.fetchTasks(uid: uid) {
             taskList = tasks
+            sortTasks()
             tableview.reloadData()
+        }
+    }
+    private func sortTasks() {
+        taskList.sort { first, second in
+            if first.completed != second.completed {
+                return !first.completed
+            }
+            guard let firstDate = first.dueDate?.dateValue() else { return false }
+            guard let secondDate = second.dueDate?.dateValue() else { return true }
+            return firstDate < secondDate
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,16 +62,29 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
         let task = taskList[indexPath.row]
         cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = nil
+
+        var subtitleParts: [String] = []
+        subtitleParts.append(task.priority.capitalized)
+
+        if let dueDate = task.dueDate {
+            let dateText = dateFormatter.string(from: dueDate.dateValue())
+            subtitleParts.append(dateText)
+        }
+
+        subtitleParts.append("\(task.pointsAwarded) pts")
+        cell.detailTextLabel?.text = subtitleParts.joined(separator: " • ")
+
         cell.accessoryType = task.completed ? .checkmark : .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         taskList[indexPath.row].completed.toggle()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-        guard let uid = Auth.auth().currentUser?.uid else { return }
         let task = taskList[indexPath.row]
+        sortTasks()
+        tableview.reloadData()
+        tableview.reloadRows(at: [indexPath], with: .automatic)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         let completedCount = taskList.filter { $0.completed }.count
         let goal = taskGoal
         Task {
@@ -77,19 +108,21 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     }
 
     func addTask(newTask: TaskItem) {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            taskList.append(newTask)
-            tableview.reloadData()
-            return
-        }
-        Task {
-            try? await taskRepository.addTask(uid: uid, task: newTask)
-            await loadTasks()
+        taskList.append(newTask)
+        sortTasks()
+        tableview.reloadData()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+            Task {
+                try? await taskRepository.addTask(uid: uid, task: newTask)
+                await loadTasks()
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddTaskSegue"{
-            if let destVC = segue.destination as? AddTaskViewController{
+        if segue.identifier == "AddTaskSegue" {
+            if let destVC = segue.destination as? AddTaskViewController {
+                destVC.delegate = self
+            } else if let navVC = segue.destination as? UINavigationController,
+                      let destVC = navVC.topViewController as? AddTaskViewController {
                 destVC.delegate = self
             }
         }
