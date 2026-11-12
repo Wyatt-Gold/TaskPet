@@ -131,35 +131,29 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         
         Task {
             do {
-                        // Save the task
-                        try await taskRepository.updateTask(uid: uid, task: task)
+                try await taskRepository.updateTask(uid: uid, task: task)
+                guard var pet = try? await petRepository.fetchPet(uid: uid) else {
+                    return
+                }
 
-                        // Fetch the user's Pet
-                        guard var pet = try? await petRepository.fetchPet(uid: uid) else {
-                            return
-                        }
+                if !wasCompleted && task.completed {
+                    pet.points += task.pointsAwarded
+                } else if wasCompleted && !task.completed {
+                    pet.points -= task.pointsAwarded
+                }
 
-                        // Award or remove points
-                        if !wasCompleted && task.completed {
-                            pet.points += task.pointsAwarded
-                        } else if wasCompleted && !task.completed {
-                            pet.points -= task.pointsAwarded
-                        }
+                try await petRepository.updatePet(uid: uid, pet: pet)
 
-                        // Save the updated Pet
-                        try await petRepository.updatePet(uid: uid, pet: pet)
+                var stats = (try? await dailyStatsRepository.fetchToday(uid: uid)) ?? DailyStats()
+                stats.tasksCompleted = completedCount
+                stats.taskGoal = goal
+                stats.ringsClosed.tasks = completedCount >= goal
 
-                        // Update daily statistics
-                        var stats = (try? await dailyStatsRepository.fetchToday(uid: uid)) ?? DailyStats()
-                        stats.tasksCompleted = completedCount
-                        stats.taskGoal = goal
-                        stats.ringsClosed.tasks = completedCount >= goal
+                await dailyStatsRepository.closeRingsAndAwardBonus(uid: uid, stats: &stats)
 
-                        await dailyStatsRepository.closeRingsAndAwardBonus(uid: uid, stats: &stats)
-
-                    } catch {
-                        print("Error updating task or pet: \(error)")
-                    }
+                } catch {
+                    print("Error updating task or pet: \(error)")
+            }
         }
     }
     
