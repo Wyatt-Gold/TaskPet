@@ -9,16 +9,16 @@ import UIKit
 import FirebaseFirestore
 
 class AddTaskViewController: UIViewController {
+    
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var priorityControl: UISegmentedControl!
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var notesField: UITextField!
     var delegate: AddTask?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dueDatePicker.minimumDate = Date()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func saveButtonPress(_ sender: Any) {
@@ -45,20 +45,12 @@ class AddTaskViewController: UIViewController {
         delegate?.addTask(newTask: task)
         dismiss(animated: true,completion: nil)
     }
+    
     func makePopup(popupTitle:String,popupMessage:String){
         let controller = UIAlertController(title: popupTitle, message: popupMessage, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         controller.addAction(okAction)
         present(controller,animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

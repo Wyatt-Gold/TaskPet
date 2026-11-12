@@ -75,15 +75,22 @@ class ShopViewController: UIViewController {
         Task { try? await petRepository.updatePet(uid: uid, pet: pet) }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Task {
+            await loadPet()
+        }
+    }
+    
     @IBAction func foodBuyButtonPressed(_ sender: Any) {
         let controller = UIAlertController(
             title: "Buy Food?",
-            message: "Spend 50 points to get one food portion?",
+            message: "Spend 30 points to get one food portion?",
             preferredStyle: .alert)
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { alert in
-            if (self.points >= 50) {
-                self.pet.points -= 50
+            if (self.points >= 30) {
+                self.pet.points -= 30
                 self.pet.foodCount += 1
                 self.refreshLabels()
                 self.persistPet()
@@ -96,20 +103,18 @@ class ShopViewController: UIViewController {
         controller.addAction(yesAction)
         controller.addAction(cancelAction)
         
-        
-        
         present(controller, animated: true)
     }
     
     @IBAction func waterBuyButtonPressed(_ sender: Any) {
         let controller = UIAlertController(
             title: "Buy Water?",
-            message: "Spend 25 points to get one water?",
+            message: "Spend 10 points to get one water?",
             preferredStyle: .alert)
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { alert in
-            if (self.points >= 25) {
-                self.pet.points -= 25
+            if (self.points >= 10) {
+                self.pet.points -= 10
                 self.pet.waterCount += 1
                 self.refreshLabels()
                 self.persistPet()
@@ -128,12 +133,12 @@ class ShopViewController: UIViewController {
     @IBAction func soapBuyButtonPressed(_ sender: Any) {
         let controller = UIAlertController(
             title: "Buy Soap?",
-            message: "Spend 25 points to get a soap bar?",
+            message: "Spend 20 points to get a soap bar?",
             preferredStyle: .alert)
 
         let yesAction = UIAlertAction(title: "Yes", style: .default) { alert in
-            if (self.points >= 25) {
-                self.pet.points -= 25
+            if (self.points >= 20) {
+                self.pet.points -= 20
                 self.pet.soapCount += 1
                 self.refreshLabels()
                 self.persistPet()
