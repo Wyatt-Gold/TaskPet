@@ -48,7 +48,14 @@ class PetViewController: UIViewController {
         bathButton.layer.cornerRadius = 14
 
         applyStats()
-        Task { await loadPet() }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        Task {
+            await loadPet()
+        }
     }
 
     private func loadPet() async {
@@ -77,35 +84,11 @@ class PetViewController: UIViewController {
     }
 
     @IBAction func walkButtonPressed(_ sender: Any) {
-        let controller = UIAlertController(
-            title: "Walk \(petName)?",
-            message: "Take \(petName) for a walk to increase happiness! Step tracking will be available in a future update.",
-            preferredStyle: .alert
-        )
-
-        let yesAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
-            self?.markRingDone(walk: true)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        controller.addAction(yesAction)
-        controller.addAction(cancelAction)
-        present(controller, animated: true)
+        // Navigation is handled by the storyboard segue
     }
 
     @IBAction func bathButtonPressed(_ sender: Any) {
-        let controller = UIAlertController(
-            title: "Give \(petName) a Bath?",
-            message: "Keep \(petName) clean! Shake-to-bathe functionality will be available in a future update.",
-            preferredStyle: .alert
-        )
-
-        let yesAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
-            self?.markRingDone(care: true)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        controller.addAction(yesAction)
-        controller.addAction(cancelAction)
-        present(controller, animated: true)
+        // Navigation is handled by the storyboard segue
     }
 
     private func markRingDone(walk: Bool = false, care: Bool = false) {

@@ -163,6 +163,8 @@
 				DEVELOPMENT_TEAM = NZXC2674K6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EOY_Project/Info.plist;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Used to sync your tasks with your calendar.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Task Pet uses motion data to track your daily steps and detect shaking when bathing your pet.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -195,6 +197,8 @@
 				DEVELOPMENT_TEAM = NZXC2674K6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EOY_Project/Info.plist;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Used to sync your tasks with your calendar.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Task Pet uses motion data to track your daily steps and detect shaking when bathing your pet.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -4,6 +4,8 @@ struct DailyStats: Codable {
     @DocumentID var id: String? // "yyyy-MM-dd"
     var steps: Int = 0
     var stepGoal: Int = 8000
+    var rewardedWalkSteps: Int = 0
+    var walkHappinessEarned: Int = 0
     var tasksCompleted: Int = 0
     var taskGoal: Int = 5
     var careDone: Bool = false
