@@ -1325,7 +1325,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="PT-TBI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7oh-vj-OZl">
-                        <rect key="frame" x="0.0" y="59" width="393" height="54"/>
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1504,26 +1504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvO-Bj-r3Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4405.3435114503818" y="200"/>
-        </scene>
-        <!--Home-->
-        <scene sceneID="q3d-fz-FtO">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PF7-ik-NqP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="PT-TBI"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fe1-GB-0x4">
-                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="D6O-kY-6z2" kind="relationship" relationship="rootViewController" id="9wI-MJ-Drd"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rgs-P3-WSQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2664.8854961832062" y="200"/>
+            <point key="canvasLocation" x="5385" y="200"/>
         </scene>
         <!--Bath Time-->
         <scene sceneID="crd-6d-Ddg">
