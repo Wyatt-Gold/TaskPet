@@ -1055,6 +1055,23 @@
                                             </switch>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ST-CALROW">
+                                        <rect key="frame" x="0.0" y="445" width="345" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar Sync" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST-CALLABEL">
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="PrimaryText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ST-CALSWITCH">
+                                                <rect key="frame" x="284" y="0.0" width="63" height="28"/>
+                                                <connections>
+                                                    <action selector="calendarSyncToggled:" destination="ST-VC" eventType="valueChanged" id="ST-A5"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -1069,6 +1086,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape" catalog="system" id="ST-TBI"/>
                     <connections>
                         <outlet property="avatarImageView" destination="ST-AVATAR" id="ST-O1"/>
+                        <outlet property="calendarSyncSwitch" destination="ST-CALSWITCH" id="ST-O6"/>
                         <outlet property="catButton" destination="ST-CATBTN" id="ST-O2"/>
                         <outlet property="darkModeSwitch" destination="ST-DARKSWITCH" id="ST-O3"/>
                         <outlet property="dogButton" destination="ST-DOGBTN" id="ST-O4"/>
@@ -1096,58 +1114,107 @@
                                         <color key="textColor" name="PrimaryText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKROW">
-                                        <rect key="frame" x="0.0" y="49.666666666666657" width="345" height="20.333333333333329"/>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI-RINGBOX">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="240"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Walk" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKLABEL">
-                                                <rect key="frame" x="0.0" y="0.0" width="307" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" name="PrimaryText"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKICON">
-                                                <rect key="frame" x="319" y="0.66666666666666607" width="26" height="19"/>
-                                                <color key="tintColor" name="PrimaryTeal"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="26" id="RI-WALKICONW"/>
-                                                </constraints>
-                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" customClass="CircularProgressView" customModule="EOY_Project" customModuleProvider="target" id="RI-WALKRING">
+                                                <rect key="frame" x="62.5" y="10" width="220" height="220"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" customClass="CircularProgressView" customModule="EOY_Project" customModuleProvider="target" id="RI-TASKSRING">
+                                                <rect key="frame" x="92.5" y="40" width="160" height="160"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" customClass="CircularProgressView" customModule="EOY_Project" customModuleProvider="target" id="RI-CARERING">
+                                                <rect key="frame" x="122.5" y="70" width="100" height="100"/>
+                                            </view>
                                         </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSROW">
-                                        <rect key="frame" x="0.0" y="86" width="345" height="20.333333333333329"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="240" id="RI-RINGBOX-H"/>
+                                            <constraint firstItem="RI-WALKRING" firstAttribute="centerX" secondItem="RI-RINGBOX" secondAttribute="centerX" id="RI-WALKRING-CX"/>
+                                            <constraint firstItem="RI-WALKRING" firstAttribute="centerY" secondItem="RI-RINGBOX" secondAttribute="centerY" id="RI-WALKRING-CY"/>
+                                            <constraint firstItem="RI-WALKRING" firstAttribute="width" constant="220" id="RI-WALKRING-W"/>
+                                            <constraint firstItem="RI-WALKRING" firstAttribute="height" constant="220" id="RI-WALKRING-H"/>
+                                            <constraint firstItem="RI-TASKSRING" firstAttribute="centerX" secondItem="RI-RINGBOX" secondAttribute="centerX" id="RI-TASKSRING-CX"/>
+                                            <constraint firstItem="RI-TASKSRING" firstAttribute="centerY" secondItem="RI-RINGBOX" secondAttribute="centerY" id="RI-TASKSRING-CY"/>
+                                            <constraint firstItem="RI-TASKSRING" firstAttribute="width" constant="160" id="RI-TASKSRING-W"/>
+                                            <constraint firstItem="RI-TASKSRING" firstAttribute="height" constant="160" id="RI-TASKSRING-H"/>
+                                            <constraint firstItem="RI-CARERING" firstAttribute="centerX" secondItem="RI-RINGBOX" secondAttribute="centerX" id="RI-CARERING-CX"/>
+                                            <constraint firstItem="RI-CARERING" firstAttribute="centerY" secondItem="RI-RINGBOX" secondAttribute="centerY" id="RI-CARERING-CY"/>
+                                            <constraint firstItem="RI-CARERING" firstAttribute="width" constant="100" id="RI-CARERING-W"/>
+                                            <constraint firstItem="RI-CARERING" firstAttribute="height" constant="100" id="RI-CARERING-H"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RI-LEGEND">
+                                        <rect key="frame" x="0.0" y="256" width="345" height="86"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tasks" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSLABEL">
-                                                <rect key="frame" x="0.0" y="0.0" width="307" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" name="PrimaryText"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSICON">
-                                                <rect key="frame" x="319" y="0.66666666666666607" width="26" height="19"/>
-                                                <color key="tintColor" name="PrimaryTeal"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="26" id="RI-TASKSICONW"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREROW">
-                                        <rect key="frame" x="0.0" y="122.3333333333333" width="345" height="20.333333333333329"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Care" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CARELABEL">
-                                                <rect key="frame" x="0.0" y="0.0" width="307" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" name="PrimaryText"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREICON">
-                                                <rect key="frame" x="319" y="0.66666666666666607" width="26" height="19"/>
-                                                <color key="tintColor" name="PrimaryTeal"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="26" id="RI-CAREICONW"/>
-                                                </constraints>
-                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKROW">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="22"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKDOT">
+                                                        <rect key="frame" x="0.0" y="4" width="14" height="14"/>
+                                                        <color key="backgroundColor" name="PrimaryTeal"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="14" id="RI-WALKDOT-W"/>
+                                                            <constraint firstAttribute="height" constant="14" id="RI-WALKDOT-H"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Walk" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKLABEL">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" name="PrimaryText"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="right" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-WALKPCT">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" name="SecondaryText"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSROW">
+                                                <rect key="frame" x="0.0" y="30" width="345" height="22"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSDOT">
+                                                        <rect key="frame" x="0.0" y="4" width="14" height="14"/>
+                                                        <color key="backgroundColor" red="1.0" green="0.584" blue="0.0" alpha="1.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="14" id="RI-TASKSDOT-W"/>
+                                                            <constraint firstAttribute="height" constant="14" id="RI-TASKSDOT-H"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tasks" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSLABEL">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" name="PrimaryText"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="right" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-TASKSPCT">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" name="SecondaryText"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREROW">
+                                                <rect key="frame" x="0.0" y="60" width="345" height="22"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREDOT">
+                                                        <rect key="frame" x="0.0" y="4" width="14" height="14"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.478" blue="1.0" alpha="1.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="14" id="RI-CAREDOT-W"/>
+                                                            <constraint firstAttribute="height" constant="14" id="RI-CAREDOT-H"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Care" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CARELABEL">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" name="PrimaryText"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="right" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI-CAREPCT">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" name="SecondaryText"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -1163,9 +1230,15 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Rings" image="ring" catalog="system" id="RI-TBI"/>
                     <connections>
-                        <outlet property="careStatusImageView" destination="RI-CAREICON" id="RI-O1"/>
-                        <outlet property="tasksStatusImageView" destination="RI-TASKSICON" id="RI-O2"/>
-                        <outlet property="walkStatusImageView" destination="RI-WALKICON" id="RI-O3"/>
+                        <outlet property="careRingView" destination="RI-CARERING" id="RI-O1"/>
+                        <outlet property="tasksRingView" destination="RI-TASKSRING" id="RI-O2"/>
+                        <outlet property="walkRingView" destination="RI-WALKRING" id="RI-O3"/>
+                        <outlet property="carePercentLabel" destination="RI-CAREPCT" id="RI-O4"/>
+                        <outlet property="tasksPercentLabel" destination="RI-TASKSPCT" id="RI-O5"/>
+                        <outlet property="walkPercentLabel" destination="RI-WALKPCT" id="RI-O6"/>
+                        <outlet property="careDotView" destination="RI-CAREDOT" id="RI-O7"/>
+                        <outlet property="tasksDotView" destination="RI-TASKSDOT" id="RI-O8"/>
+                        <outlet property="walkDotView" destination="RI-WALKDOT" id="RI-O9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RI-FR" sceneMemberID="firstResponder"/>

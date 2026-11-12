@@ -1,4 +1,5 @@
 import UIKit
+import EventKit
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -24,13 +25,33 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         return formatter
     }()
     private let petRepository = PetRepository()
-    
+    private let calendarSyncService = CalendarSyncService()
+    private var calendarConnected = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableview.delegate = self
         tableview.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(calendarStoreChanged),
+                                                 name: .EKEventStoreChanged, object: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         Task {
             await loadTaskGoal()
+            await syncCalendarIfConnected()
+            await loadTasks()
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func calendarStoreChanged() {
+        Task {
+            await syncCalendarIfConnected()
             await loadTasks()
         }
     }
@@ -39,6 +60,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         guard let uid = Auth.auth().currentUser?.uid,
               let profile = try? await userRepository.fetchProfile(uid: uid) else { return }
         taskGoal = profile.settings.taskGoal
+        calendarConnected = profile.connections.calendarConnected
+    }
+
+    private func syncCalendarIfConnected() async {
+        guard calendarConnected, let uid = Auth.auth().currentUser?.uid else { return }
+        await calendarSyncService.sync(uid: uid)
     }
 
     private func loadTasks() async {
@@ -128,7 +155,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                         stats.taskGoal = goal
                         stats.ringsClosed.tasks = completedCount >= goal
 
-                        try await dailyStatsRepository.updateToday(uid: uid, stats: stats)
+                        await dailyStatsRepository.closeRingsAndAwardBonus(uid: uid, stats: &stats)
 
                     } catch {
                         print("Error updating task or pet: \(error)")

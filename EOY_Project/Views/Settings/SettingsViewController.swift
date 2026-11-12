@@ -1,4 +1,5 @@
 import UIKit
+import EventKit
 import FirebaseAuth
 
 class SettingsViewController: UIViewController {
@@ -7,11 +8,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var dogButton: UIButton!
     @IBOutlet weak var catButton: UIButton!
     @IBOutlet weak var darkModeSwitch: UISwitch!
+    @IBOutlet weak var calendarSyncSwitch: UISwitch!
 
     private let userRepository = UserRepository()
     private let petRepository = PetRepository()
+    private let eventStore = EKEventStore()
     private var pet = Pet()
     private var settings = UserSettings()
+    private var connections = Connections()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,8 @@ class SettingsViewController: UIViewController {
             usernameField.text = profile.displayName
             settings = profile.settings
             darkModeSwitch.isOn = settings.darkMode
+            connections = profile.connections
+            calendarSyncSwitch.isOn = connections.calendarConnected
         }
         if let fetched = try? await petRepository.fetchPet(uid: uid) {
             pet = fetched
@@ -71,5 +77,42 @@ class SettingsViewController: UIViewController {
         settings.darkMode = sender.isOn
         let settings = self.settings
         Task { try? await userRepository.updateSettings(uid: uid, settings: settings) }
+    }
+
+    @IBAction func calendarSyncToggled(_ sender: UISwitch) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard sender.isOn else {
+            connections.calendarConnected = false
+            connections.calendarProvider = nil
+            let c = connections
+            Task { try? await userRepository.updateConnections(uid: uid, connections: c) }
+            return
+        }
+        Task {
+            let status = EKEventStore.authorizationStatus(for: .event)
+            let granted = status == .fullAccess ? true : ((try? await eventStore.requestFullAccessToEvents()) ?? false)
+            if granted {
+                connections.calendarConnected = true
+                connections.calendarProvider = "apple"
+                try? await userRepository.updateConnections(uid: uid, connections: connections)
+            } else {
+                sender.setOn(false, animated: true)
+                presentCalendarDeniedAlert()
+            }
+        }
+    }
+
+    private func presentCalendarDeniedAlert() {
+        let alert = UIAlertController(
+            title: "Calendar Access Needed",
+            message: "Enable Calendar access for this app in iOS Settings > Privacy & Security > Calendars.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
     }
 }

@@ -2,6 +2,9 @@ import FirebaseFirestore
 
 struct DailyStatsRepository {
     private let db = Firestore.firestore()
+    private let petRepository = PetRepository()
+
+    static let dailyBonusPoints = 50
 
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,7 +26,24 @@ struct DailyStatsRepository {
         let data = try Firestore.Encoder().encode(stats)
         try await db.collection("users").document(uid).collection("dailyStats").document(todayKey).setData(data, merge: true)
     }
-    
+
+    // Call after mutating ringsClosed on `stats`. bonusPointsEarned being nonzero IS
+    // the "already awarded today" flag, so no extra field is needed.
+    // Note: read-modify-write isn't transactional, so two ring-closes within the
+    // same instant could double-award; wrap in a Firestore transaction if that ever
+    // becomes a real issue.
+    func closeRingsAndAwardBonus(uid: String, stats: inout DailyStats) async {
+        let allClosed = stats.ringsClosed.walk && stats.ringsClosed.tasks && stats.ringsClosed.care
+        if allClosed && stats.bonusPointsEarned == 0 {
+            stats.bonusPointsEarned = Self.dailyBonusPoints
+            if var pet = try? await petRepository.fetchPet(uid: uid) {
+                pet.points += Self.dailyBonusPoints
+                try? await petRepository.updatePet(uid: uid, pet: pet)
+            }
+        }
+        try? await updateToday(uid: uid, stats: stats)
+    }
+
     func saveWalkingProgress(uid: String, steps: Int) async throws -> DailyStats {
         let today = todayKey
 

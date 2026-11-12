@@ -21,6 +21,7 @@ class BathViewController: UIViewController {
     @IBOutlet weak var buyMoreButton: UIButton!
     
     private let petRepository = PetRepository()
+    private let dailyStatsRepository = DailyStatsRepository()
     private var currentPet: Pet?
     
     private let motionManager = CMMotionManager()
@@ -191,6 +192,8 @@ class BathViewController: UIViewController {
 
                 bathInstructionLabel.text = "Bath complete! Your pet is clean!"
 
+                await markCareRingClosed(uid: uid)
+
             } catch {
                 bathInstructionLabel.text = "Unable to complete bath."
                 showAlert(
@@ -213,5 +216,12 @@ class BathViewController: UIViewController {
         )
 
         present(alert, animated: true)
+    }
+
+    private func markCareRingClosed(uid: String) async {
+        var todayStats = (try? await dailyStatsRepository.fetchToday(uid: uid)) ?? DailyStats()
+        guard !todayStats.ringsClosed.care else { return }
+        todayStats.ringsClosed.care = true
+        await dailyStatsRepository.closeRingsAndAwardBonus(uid: uid, stats: &todayStats)
     }
 }

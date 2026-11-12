@@ -4,6 +4,8 @@
 <dict>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Used to sync your tasks with your calendar.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Used to count your steps and detect bath-time shaking for your pet.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

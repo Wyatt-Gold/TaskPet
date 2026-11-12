@@ -205,6 +205,10 @@ class WalkViewController: UIViewController {
                     happinessProgressView.progress =
                         Float(stats.walkHappinessEarned) / Float(maximumHappiness)
 
+                    if stats.steps >= stats.stepGoal {
+                        await markWalkRingClosed(uid: uid)
+                    }
+
                 } catch {
                     print("Failed to save walking progress: \(error)")
                 }
@@ -212,6 +216,13 @@ class WalkViewController: UIViewController {
 
             isSaving = false
         }
+    }
+
+    private func markWalkRingClosed(uid: String) async {
+        var todayStats = (try? await dailyStatsRepository.fetchToday(uid: uid)) ?? DailyStats()
+        guard !todayStats.ringsClosed.walk else { return }
+        todayStats.ringsClosed.walk = true
+        await dailyStatsRepository.closeRingsAndAwardBonus(uid: uid, stats: &todayStats)
     }
     
     private func updateActiveTime(steps: Int) {

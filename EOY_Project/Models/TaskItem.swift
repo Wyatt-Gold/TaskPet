@@ -10,5 +10,6 @@ struct TaskItem: Codable {
     var completedAt: Timestamp?
     var pointsAwarded: Int = 0
     var source: String = "manual" // "manual" | "canvas" | "calendar"
+    var calendarEventID: String? // EKEvent.eventIdentifier, set only when source == "calendar"
     @ServerTimestamp var createdAt: Timestamp?
 }
